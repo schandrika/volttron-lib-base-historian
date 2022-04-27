@@ -214,39 +214,39 @@ the same date over again.
 """
 
 
-from abc import abstractmethod
-from collections import defaultdict
-from datetime import datetime, timedelta
-from functools import wraps
 import logging
-from queue import Queue, Empty
 import os
 import re
 import sqlite3
 import threading
-from threading import Thread
 import weakref
+from abc import abstractmethod
+from collections import defaultdict
+from datetime import datetime, timedelta
+from functools import wraps
+from queue import Queue, Empty
+from threading import Thread
 
-from dateutil.parser import parse
 import gevent
-from gevent import get_hub
 import pytz
+from dateutil.parser import parse
+from gevent import get_hub
+from volttron.client.messaging import topics, headers as headers_mod
+from volttron.client.messaging.health import (STATUS_BAD,
+                                              STATUS_GOOD,
+                                              Status)
+from volttron.client import (Agent, Core)
+from volttron.client.subsystems import Query
+from volttron.client.vip.agent.subsystems import RPC
+from volttron.client.vip.agent.subsystems.query import Query
+from volttron.server.async_ import AsyncCall
 
-from volttron.platform.agent.base_aggregate_historian import AggregateHistorian
-from volttron.platform.agent.utils import process_timestamp, \
+# TODO break out AggregateHistorian.  It is not in this project any longer.
+# from volttron.platform.agent.base_aggregate_historian import AggregateHistorian
+from volttron.utils import (
+    process_timestamp,
     fix_sqlite3_datetime, get_aware_utc_now, parse_timestamp_string
-from volttron.platform.async_ import AsyncCall
-from volttron.platform.messaging import topics, headers as headers_mod
-from volttron.platform.messaging.health import (STATUS_BAD,
-                                                STATUS_UNKNOWN,
-                                                STATUS_GOOD,
-                                                STATUS_STARTING,
-                                                Status)
-from volttron.platform.vip.agent import Agent, compat
-from volttron.platform.vip.agent.core import Core
-from volttron.platform.vip.agent.subsystems import RPC
-from volttron.platform.vip.agent.subsystems.query import Query
-
+)
 
 try:
     import ujson
