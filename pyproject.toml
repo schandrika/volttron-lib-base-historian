@@ -15,6 +15,7 @@ python = ">=3.8,<4.0"
 # TODO: uncomment when volttron 0.1.0 is available
 # volttron = "^0.1.0"
 volttron = {path = "../../volttron-core", develop = true}
+ply = "^3.11"
 
 [tool.poetry.dev-dependencies]
 # formatting, quality, tests

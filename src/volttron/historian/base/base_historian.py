@@ -236,7 +236,8 @@ from volttron.client.messaging.health import (STATUS_BAD,
                                               STATUS_GOOD,
                                               Status)
 from volttron.client import (Agent, Core)
-from volttron.client.subsystems import Query
+#from volttron.client.subsystems import Query
+from volttron.client import subsystems
 from volttron.client.vip.agent.subsystems import RPC
 from volttron.client.vip.agent.subsystems.query import Query
 from volttron.server.async_ import AsyncCall
@@ -245,12 +246,14 @@ from volttron.server.async_ import AsyncCall
 # from volttron.platform.agent.base_aggregate_historian import AggregateHistorian
 from volttron.utils import (
     process_timestamp,
-    fix_sqlite3_datetime, get_aware_utc_now, parse_timestamp_string
+    fix_sqlite3_datetime, get_aware_utc_now, parse_timestamp_string,
+    format_timestamp
 )
+from volttron.utils import ClientContext as cc
 
 try:
     import ujson
-    from volttron.platform.jsonapi import dumps as _dumps, loads as _loads
+    from volttron.utils.jsonapi import dumps as _dumps, loads as _loads
 
     def dumps(data):
         try:
@@ -264,9 +267,7 @@ try:
         except Exception:
             return _loads(data_string)
 except ImportError:
-    from volttron.platform.jsonapi import dumps, loads
-
-from volttron.platform.agent import utils
+    from volttron.utils.jsonapi import dumps, loads
 
 _log = logging.getLogger(__name__)
 
@@ -292,7 +293,7 @@ def add_timing_data_to_header(headers, agent_id, phase):
     else:
         agent_timing_data = timing_data[agent_id]
 
-    agent_timing_data[phase] = utils.format_timestamp(utils.get_aware_utc_now())
+    agent_timing_data[phase] = format_timestamp(get_aware_utc_now())
 
     values = list(agent_timing_data.values())
 
@@ -813,8 +814,8 @@ class BaseHistorianAgent(Agent):
             timestamp, my_tz = process_timestamp(timestamp_string, topic)
             headers['time_error'] = self.does_time_exceed_tolerance(topic, timestamp)
 
-        if sender == 'pubsub.compat':
-            message = compat.unpack_legacy_message(headers, message)
+        # if sender == 'pubsub.compat':
+        #     message = compat.unpack_legacy_message(headers, message)
 
         if self.gather_timing_data:
             add_timing_data_to_header(headers, self.core.agent_uuid or self.core.identity, "collected")
@@ -832,12 +833,12 @@ class BaseHistorianAgent(Agent):
         # Anon the topic if necessary.
         topic = self.get_renamed_topic(topic)
         try:
-            # 2.0 agents compatability layer makes sender == pubsub.compat so
-            # we can do the proper thing when it is here
-            if sender == 'pubsub.compat':
-                data = compat.unpack_legacy_message(headers, message)
-            else:
-                data = message
+            # # 2.0 agents compatability layer makes sender == pubsub.compat so
+            # # we can do the proper thing when it is here
+            # if sender == 'pubsub.compat':
+            #     data = compat.unpack_legacy_message(headers, message)
+            # else:
+            data = message
         except ValueError as e:
             _log.error("message for {topic} bad message string: "
                        "{message_string}".format(topic=topic,
@@ -970,8 +971,8 @@ class BaseHistorianAgent(Agent):
         try:
             # 2.0 agents compatability layer makes sender == pubsub.compat so
             # we can do the proper thing when it is here
-            if sender == 'pubsub.compat':
-                message = compat.unpack_legacy_message(headers, message)
+            # if sender == 'pubsub.compat':
+            #     message = compat.unpack_legacy_message(headers, message)
 
             if isinstance(message, dict):
                 values = message
@@ -1914,7 +1915,7 @@ class BaseQueryHistorianAgent(Agent):
         ))
         global time_parser
         if time_parser is None:
-            if utils.is_secure_mode():
+            if cc.is_secure_mode():
                 # find agent's data dir. we have write access only to that dir
                 for d in os.listdir(os.getcwd()):
                     if d.endswith(".agent-data"):
@@ -2109,9 +2110,10 @@ class BaseQueryHistorianAgent(Agent):
                                 "(agg_type) and aggregation time period"
                                 "(agg_period) to query aggregate data")
 
-        if agg_period:
-            agg_period = AggregateHistorian.normalize_aggregation_time_period(
-                agg_period)
+        # TODO: Pull out aggregate historian
+        # if agg_period:
+        #     agg_period = AggregateHistorian.normalize_aggregation_time_period(
+        #         agg_period)
         if start is not None:
             try:
                 start = parse_timestamp_string(start)

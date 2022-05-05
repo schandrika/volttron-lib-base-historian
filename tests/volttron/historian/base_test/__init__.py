@@ -37,16 +37,13 @@
 # }}}
 
 """
-VOLTTRON Historian Base package.
+VOLTTRON Historian Base test package.
 
 """
 
 from typing import List
-
-from volttron.historian.base.base_historian import BaseHistorianAgent, BaseQueryHistorianAgent, BaseHistorian
+from volttron.historian.base_test.integration_test_interface import HistorianTestInterface
 
 __all__: List[str] = [
-    "BaseHistorianAgent",
-    "BaseQueryHistorianAgent",
-    "BaseHistorian"
+    "HistorianTestInterface"
 ]  # noqa: WPS410 (the only __variable__ we use)
