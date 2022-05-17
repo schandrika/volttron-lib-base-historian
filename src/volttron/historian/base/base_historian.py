@@ -235,11 +235,7 @@ from volttron.client.messaging import topics, headers as headers_mod
 from volttron.client.messaging.health import (STATUS_BAD,
                                               STATUS_GOOD,
                                               Status)
-from volttron.client import (Agent, Core)
-#from volttron.client.subsystems import Query
-from volttron.client import subsystems
-from volttron.client.vip.agent.subsystems import RPC
-from volttron.client.vip.agent.subsystems.query import Query
+from volttron.client import (Agent, Core, RPC, Query)
 from volttron.server.async_ import AsyncCall
 
 # TODO break out AggregateHistorian.  It is not in this project any longer.
@@ -648,7 +644,7 @@ class BaseHistorianAgent(Agent):
         for should_sub, prefix, cb in subscriptions:
             if should_sub and not self._readonly:
                 if prefix not in self._current_subscriptions:
-                    _log.debug("subscribing to {}".format(prefix))
+                    _log.debug("subscribing.. to {} {}".format(prefix, cb))
                     try:
                         self.vip.pubsub.subscribe(peer='pubsub',
                                                   prefix=prefix,
@@ -805,7 +801,6 @@ class BaseHistorianAgent(Agent):
 
     def _capture_record_data(self, peer, sender, bus, topic, headers,
                              message):
-        # _log.debug('Capture record data {}'.format(topic))
         # Anon the topic if necessary.
         topic = self.get_renamed_topic(topic)
         timestamp_string = headers.get(headers_mod.DATE, None)
@@ -814,12 +809,8 @@ class BaseHistorianAgent(Agent):
             timestamp, my_tz = process_timestamp(timestamp_string, topic)
             headers['time_error'] = self.does_time_exceed_tolerance(topic, timestamp)
 
-        # if sender == 'pubsub.compat':
-        #     message = compat.unpack_legacy_message(headers, message)
-
         if self.gather_timing_data:
             add_timing_data_to_header(headers, self.core.agent_uuid or self.core.identity, "collected")
-
         self._event_queue.put(
             {'source': 'record',
              'topic': topic,
@@ -832,27 +823,11 @@ class BaseHistorianAgent(Agent):
 
         # Anon the topic if necessary.
         topic = self.get_renamed_topic(topic)
-        try:
-            # # 2.0 agents compatability layer makes sender == pubsub.compat so
-            # # we can do the proper thing when it is here
-            # if sender == 'pubsub.compat':
-            #     data = compat.unpack_legacy_message(headers, message)
-            # else:
-            data = message
-        except ValueError as e:
-            _log.error("message for {topic} bad message string: "
-                       "{message_string}".format(topic=topic,
-                                                 message_string=message[0]))
-            return
-        except IndexError as e:
-            _log.error("message for {topic} missing message string".format(
-                topic=topic))
-            return
 
         if self.gather_timing_data:
             add_timing_data_to_header(headers, self.core.agent_uuid or self.core.identity, "collected")
 
-        for point, item in data.items():
+        for point, item in message.items():
             if 'Readings' not in item or 'Units' not in item:
                 _log.error("logging request for {topic} missing Readings "
                            "or Units".format(topic=topic))
@@ -969,11 +944,6 @@ class BaseHistorianAgent(Agent):
             headers['time_error'] = self.does_time_exceed_tolerance(topic, timestamp)
 
         try:
-            # 2.0 agents compatability layer makes sender == pubsub.compat so
-            # we can do the proper thing when it is here
-            # if sender == 'pubsub.compat':
-            #     message = compat.unpack_legacy_message(headers, message)
-
             if isinstance(message, dict):
                 values = message
             else:
