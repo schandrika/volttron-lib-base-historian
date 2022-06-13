@@ -1,0 +1,20 @@
+# Changes here will be overwritten by Copier
+_commit: v0.3.0-beta-2-g3b3bf71
+_src_path: gh:VOLTTRON/copier-poetry-volttron-agent
+author_email: volttron@pnnl.gov
+author_fullname: VOLTTRON Team
+author_username: VOLTTRON
+copyright_date: '2022'
+copyright_holder: VOLTTRON Team
+copyright_holder_email: volttron@pnnl.gov
+copyright_license: Apache License 2.0
+project_description: null
+project_name: VOLTTRON Historian Base
+python_agent_class_name: BaseHistorian
+python_package_command_line_name: volttron-historian-base
+python_package_distribution_name: volttron-base-historian
+python_package_import_name: volttron.historian.base
+repository_name: volttron-base-historian
+repository_namespace: VOLTTRON
+repository_provider: github.com
+use_precommit: true
