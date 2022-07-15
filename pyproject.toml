@@ -1,21 +1,19 @@
 [tool.poetry]
-name = "volttron-base-historian"
+name = "volttron-lib-base-historian"
 version = "0.1.0"
 description = "None"
 authors = ["VOLTTRON Team <volttron@pnnl.gov>"]
 license = "Apache License 2.0"
 readme = "README.md"
-repository = "https://github.com/VOLTTRON/volttron-base-historian"
-homepage = "https://github.com/VOLTTRON/volttron-base-historian"
+repository = "https://github.com/VOLTTRON/volttron-lib-base-historian"
+homepage = "https://github.com/VOLTTRON/volttron-lib-base-historian"
 keywords = []
 packages = [ { include = "volttron", from = "src" } ]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-# TODO: uncomment when volttron 0.1.0 is available
-# volttron = "^0.1.0"
 ply = "^3.11"
-# volttron-testing = {path = "../../volttron-testing", develop = true}
+volttron = "^10.0.1a13"
 
 [tool.poetry.dev-dependencies]
 # formatting, quality, tests
@@ -30,8 +28,7 @@ mypy = "^0.942"
 coverage = "^6.3.2"
 Sphinx = "^4.5.0"
 sphinx-rtd-theme = "^1.0.0"
-volttron-testing = {path = "../volttron-testing", develop = true}
-volttron = {path = "../volttron-core", develop = true}
+volttron-testing = "^0.3.1a3"
 
 [tool.yapfignore]
 ignore_patterns = [
