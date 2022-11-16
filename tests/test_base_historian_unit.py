@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pytz import UTC
 
-from testing.volttron import TestServer
+from volttrontesting.server_mock import TestServer
 from volttron.client import Agent
 
 from volttron.historian.base import BaseHistorianAgent
