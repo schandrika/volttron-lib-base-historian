@@ -235,7 +235,9 @@ from volttron.client.messaging import topics, headers as headers_mod
 from volttron.client.messaging.health import (STATUS_BAD,
                                               STATUS_GOOD,
                                               Status)
-from volttron.client import (Agent, Core, RPC, Query)
+#from volttron.client import (Agent, Core, RPC, Query)
+from volttron.client.vip.agent import Agent, Core, RPC
+from volttron.client.vip.agent.subsystems.query import Query
 from volttron.server.async_ import AsyncCall
 
 # TODO break out AggregateHistorian.  Testing
