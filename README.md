@@ -1,11 +1,10 @@
 # VOLTTRON Historian Base
 
-[![ci](https://github.com/VOLTTRON/volttron-base-historian/workflows/ci/badge.svg)](https://github.com/VOLTTRON/volttron-base-historian/actions?query=workflow%3Aci)
-[![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://VOLTTRON.github.io/volttron-base-historian/)
-[![pypi version](https://img.shields.io/pypi/v/volttron-base-historian.svg)](https://pypi.org/project/volttron-base-historian/)
+[![ci](https://github.com/VOLTTRON/volttron-base-historian/workflows/ci/badge.svg)](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions?query=workflow%3Aci)
+[![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://VOLTTRON.github.io/volttron-lib-base-historian/)
+[![pypi version](https://img.shields.io/pypi/v/volttron-base-historian.svg)](https://pypi.org/project/volttron-lib-base-historian/)
 
-
-None
+VOLTTRON base historian framework
 
 ## Prerequisites
 
