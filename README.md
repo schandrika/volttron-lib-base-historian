@@ -1,8 +1,7 @@
 [![Run Pytests](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions/workflows/run-test.yml/badge.svg)](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions/workflows/run-test.yml)
-[![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://VOLTTRON.github.io/volttron-lib-base-historian/)
 [![pypi version](https://img.shields.io/pypi/v/volttron-base-historian.svg)](https://pypi.org/project/volttron-lib-base-historian/)
 
-VOLTTRON base historian framework
+VOLTTRON base historian framework that provide common functions such as caching, error handling, input validation etc.
 
 ## Requirements
 
@@ -10,38 +9,16 @@ VOLTTRON base historian framework
 
 ## Installation
 
-Create and activate a virtual environment.
-
-```shell
-python -m venv env
-source env/bin/activate
-```
-
-Installing volttron-listener requires a running volttron instance.
-
-```shell
-pip install volttron
-
-# Start platform with output going to volttron.log
-volttron -vv -l volttron.log &
-```
-
-Install and start the volttron-listener.
-
-```shell
-vctl install volttron-listener --start
-```
-
-View the status of the installed agent
-
-```shell
-vctl status
-```
+This library can be installed using ```pip install volttron-lib-base-historian```. However, this is not necessary. Any 
+historian agent that uses this library will automatically install it as part of its installation. For example, 
+installing [SQLiteHistorian](https://github.com/eclipse-volttron/volttron-sqlitehistorian) will automatically install 
+volttron-lib-base-historian into the same python environment
 
 ## Development
 
-Developing on this agent requires poetry 1.2.2 or greater be used.  One can install it from https://python-poetry.org/docs/#installation.  The VOLTTRON team prefers to have the python environments created within the project directory.  Execute
-this command to make that behavior the default.
+Developing on this library requires poetry 1.2.2 or greater be used.  
+One can install it from https://python-poetry.org/docs/#installation.  The VOLTTRON team prefers to have the python 
+environments created within the project directory.  Execute this command to make that behavior the default.
 
 ```shell
 poetry config virtualenvs.in-project true
@@ -50,13 +27,13 @@ poetry config virtualenvs.in-project true
 Clone the repository.
 
 ```shell
-git clone https://github.com/eclipse-volttron/volttron-listener
+git clone https://github.com/eclipse-volttron/volttron-lib-base-historian
 ```
 
 Change to the repository directory and use poetry install to setup the environment.
 
 ```shell
-cd volttron-listener
+cd volttron-lib-base-historian
 poetry install
 ```
 
