@@ -12,9 +12,9 @@ packages = [ { include = "volttron", from = "src" }, { include = "volttron", fro
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-volttron = "^10.0.1a32"
+volttron = "^10.0.1a35"
 ply = "^3.11"
-volttron-testing="^0.3.1a10"
+volttron-testing="^0.3.1a16"
 
 [tool.poetry.group.dev.dependencies]
 # formatting, quality, tests
