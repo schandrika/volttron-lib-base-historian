@@ -1,4 +1,4 @@
-[![ci](https://github.com/VOLTTRON/volttron-base-historian/workflows/ci/badge.svg)](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions?query=workflow%3Aci)
+[![Run Pytests](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions/workflows/run-test.yml/badge.svg)](https://github.com/eclipse-volttron/volttron-lib-base-historian/actions/workflows/run-test.yml)
 [![documentation](https://img.shields.io/badge/docs-mkdocs%20material-blue.svg?style=flat)](https://VOLTTRON.github.io/volttron-lib-base-historian/)
 [![pypi version](https://img.shields.io/pypi/v/volttron-base-historian.svg)](https://pypi.org/project/volttron-lib-base-historian/)
 
