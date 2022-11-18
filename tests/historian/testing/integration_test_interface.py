@@ -82,7 +82,6 @@ class HistorianTestInterface:
             assert (result == expected_date + 'T' + expected_time[:-7] +
                     '.000000+00:00')
 
-    @pytest.mark.historian
     def test_query(self, historian, fake_agent):
         """
         Test query method with valid inputs. Inserts three points as part
@@ -164,7 +163,6 @@ class HistorianTestInterface:
         assert (result['values'][0][1] == damper_reading)
         assert set(result['metadata'].items()) == set(percent_meta.items())
 
-    @pytest.mark.historian
     def test_query_failure(self, historian, fake_agent):
         """
         Test query with invalid input
@@ -185,7 +183,6 @@ class HistorianTestInterface:
             print("topic required excinfo {}".format(error))
             assert '"Topic" required' in str(error.message)
 
-    @pytest.mark.historian
     def test_get_topic_list(self, historian, fake_agent):
         """
         Test the get_topic_list api.
@@ -233,7 +230,6 @@ class HistorianTestInterface:
                     "Building/LAB/Device/newtopic2"]
         assert set(expected).issubset(set(topic_list))
 
-    @pytest.mark.historian
     def test_get_topics_by_pattern(self, historian, fake_agent):
         """
         Test the get_topics_by_pattern api with valid inputs.
@@ -292,7 +288,6 @@ class HistorianTestInterface:
         print(f"Set is expected {set(expected)} {topic_dict}")
         assert expected == set(topic_dict)
 
-    @pytest.mark.historian
     def test_get_topics_by_pattern_failure(self, historian, fake_agent):
         """
         Test the get_topics_by_pattern api with invalid input(None).
@@ -336,7 +331,6 @@ class HistorianTestInterface:
                                     'get_topics_by_pattern',
                                     topic_pattern=pattern_1).get(timeout=10)
 
-    @pytest.mark.historian
     def test_get_version(self, historian, fake_agent):
         """
         Test the get_version api
@@ -351,7 +345,6 @@ class HistorianTestInterface:
         version = fake_agent.vip.rpc.call('platform.historian', 'get_version').get(timeout=10)
         assert version
 
-    @pytest.mark.historian
     def test_insert(self, historian, fake_agent):
         """
         Test the insert api with valid input
@@ -390,7 +383,6 @@ class HistorianTestInterface:
         result = fake_agent.vip.rpc.call(identity, 'query', topic="Building/LAB/Device/test1").get(timeout=10)
         print(result)
 
-    @pytest.mark.historian
     def test_insert_failure(self, historian, fake_agent):
         """
         Test the insert api with invalid input
@@ -410,7 +402,6 @@ class HistorianTestInterface:
         with pytest.raises(RemoteError):
             fake_agent.vip.rpc.call('platform.historian', 'insert', to_send).get(timeout=10)
 
-    @pytest.mark.historian
     def test_get_topics_metadata(self, historian, fake_agent):
         """
         Test the get_topics_metadata api with valid inputs
@@ -474,7 +465,6 @@ class HistorianTestInterface:
         assert result['datalogger/Building/LAB/Device/temp2'] == \
                {'units': 'F', 'tz': 'UTC', 'type': 'float'}
 
-    @pytest.mark.historian
     def test_get_topics_metadata_failure(self, historian, fake_agent):
         """
         Test the get_topics_metadata api with invalid input

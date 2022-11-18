@@ -3,7 +3,7 @@ from time import sleep
 
 from volttron.utils import format_timestamp
 
-from volttron.historian.base import BaseHistorianAgent
+from historian.base import BaseHistorianAgent
 
 
 class ConcreteHistorianAgent(BaseHistorianAgent):
