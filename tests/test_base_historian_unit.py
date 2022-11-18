@@ -9,7 +9,7 @@ from pytz import UTC
 from volttrontesting.server_mock import TestServer
 from volttron.client import Agent
 
-from volttron.historian.base import BaseHistorianAgent
+from historian.base import BaseHistorianAgent
 
 
 agent_data_dir = os.path.join(os.getcwd(), os.path.basename(os.getcwd()) + ".agent-data")
@@ -125,4 +125,5 @@ def base_historian_agent():
     if os.path.exists(CACHE_NAME):
         os.remove(CACHE_NAME)
     if os.path.exists(agent_data_dir):
-        os.rmdir(agent_data_dir)
+        import shutil
+        shutil.rmtree(agent_data_dir)

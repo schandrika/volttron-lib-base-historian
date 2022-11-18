@@ -43,7 +43,7 @@ VOLTTRON Historian Base package.
 
 from typing import List
 
-from volttron.historian.base.base_historian import BaseHistorianAgent, BaseQueryHistorianAgent, BaseHistorian
+from historian.base.base_historian import BaseHistorianAgent, BaseQueryHistorianAgent, BaseHistorian
 
 __all__: List[str] = [
     "BaseHistorianAgent",
