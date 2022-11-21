@@ -12,7 +12,8 @@ packages = [ { include = "historian", from = "src" }, { include = "historian", f
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-volttron = "^10.0.1a35"
+volttron = ">=10.0.1a42,<11.0"
+
 ply = "^3.11"
 volttron-testing="^0.3.1a16"
 
