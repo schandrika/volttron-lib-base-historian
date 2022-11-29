@@ -22,11 +22,17 @@
 # ===----------------------------------------------------------------------===
 # }}}
 
-import sys
-from pathlib import Path
+"""
+VOLTTRON Historian Base package.
 
-p = Path(__file__)
-if p.parent.parent.parent.resolve().as_posix() not in sys.path:
-    sys.path.insert(0, p.parent.parent.resolve().as_posix())
+"""
 
-print(sys.path)
+from typing import List
+
+from historian.base.base_historian import BaseHistorianAgent, BaseQueryHistorianAgent, BaseHistorian
+
+__all__: List[str] = [
+    "BaseHistorianAgent",
+    "BaseQueryHistorianAgent",
+    "BaseHistorian"
+]  # noqa: WPS410 (the only __variable__ we use)

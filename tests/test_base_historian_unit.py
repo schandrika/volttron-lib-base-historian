@@ -1,3 +1,27 @@
+# -*- coding: utf-8 -*- {{{
+# ===----------------------------------------------------------------------===
+#
+#                 Installable Component of Eclipse VOLTTRON
+#
+# ===----------------------------------------------------------------------===
+#
+# Copyright 2022 Battelle Memorial Institute
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy
+# of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+# ===----------------------------------------------------------------------===
+# }}}
+
 import datetime
 import os
 from shutil import rmtree
@@ -6,10 +30,10 @@ from pathlib import Path
 import pytest
 from pytz import UTC
 
-from testing.volttron import TestServer
+from volttrontesting.server_mock import TestServer
 from volttron.client import Agent
 
-from volttron.historian.base import BaseHistorianAgent
+from historian.base import BaseHistorianAgent
 
 
 agent_data_dir = os.path.join(os.getcwd(), os.path.basename(os.getcwd()) + ".agent-data")
@@ -125,4 +149,5 @@ def base_historian_agent():
     if os.path.exists(CACHE_NAME):
         os.remove(CACHE_NAME)
     if os.path.exists(agent_data_dir):
-        os.rmdir(agent_data_dir)
+        import shutil
+        shutil.rmtree(agent_data_dir)

@@ -1,23 +1,22 @@
 [tool.poetry]
-name = "volttron-base-historian"
+name = "volttron-lib-base-historian"
 version = "0.1.0"
-description = "None"
+description = "A base library with extension points for using with the VOLTTRON platform."
 authors = ["VOLTTRON Team <volttron@pnnl.gov>"]
 license = "Apache License 2.0"
 readme = "README.md"
-repository = "https://github.com/VOLTTRON/volttron-base-historian"
-homepage = "https://github.com/VOLTTRON/volttron-base-historian"
+repository = "https://github.com/eclipse-volttron/volttron-lib-base-historian"
+homepage = "https://github.com/eclipse-volttron/volttron-lib-base-historian"
 keywords = []
-packages = [ { include = "volttron", from = "src" } ]
+packages = [ { include = "historian", from = "src" }, { include = "historian", from = "tests" } ]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-# TODO: uncomment when volttron 0.1.0 is available
-# volttron = "^0.1.0"
-ply = "^3.11"
-# volttron-testing = {path = "../../volttron-testing", develop = true}
+volttron = ">=10.0.2rc0,<11.0"
 
-[tool.poetry.dev-dependencies]
+ply = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
 # formatting, quality, tests
 pytest = "^6.2.5"
 mock = "^4.0.3"
@@ -28,10 +27,10 @@ isort = "^5.10.1"
 safety = "^1.10.3"
 mypy = "^0.942"
 coverage = "^6.3.2"
+pytest-cov = "^3.0.0"
 Sphinx = "^4.5.0"
 sphinx-rtd-theme = "^1.0.0"
-volttron-testing = {path = "../volttron-testing", develop = true}
-volttron = {path = "../volttron-core", develop = true}
+volttron-testing = "^0.4.0rc0"
 
 [tool.yapfignore]
 ignore_patterns = [
@@ -46,9 +45,6 @@ based_on_style = "pep8"
 spaces_before_comment = 4
 column_limit = 99
 split_before_logical_operator = true
-
-[tool.poetry.scripts]
-volttron-historian-base = "volttron.historian.base.agent:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
