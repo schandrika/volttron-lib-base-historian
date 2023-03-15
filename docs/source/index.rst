@@ -9,7 +9,7 @@ store of choice. They provide interfaces to query this data based on different c
 Base Historian
 ==============
 
-The VOLTTRON team maintains a `BaseHistorian <https://pypi.org/project/volttron-lib-sql-historian/>`_ which provides
+The VOLTTRON team maintains a `BaseHistorian <https://pypi.org/project/volttron-lib-base-historian/>`_ which provides
 common useful functionalities the specific implementations can use out of the box and/or build on.
 
 Base Historian
