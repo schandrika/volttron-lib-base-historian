@@ -10,7 +10,7 @@ Base Historian
 ==============
 
 The VOLTTRON team maintains a `BaseHistorian <https://pypi.org/project/volttron-lib-base-historian/>`_ which provides
-common useful functionalities the specific implementations can use out of the box and/or build on.
+commonly used functionalities the specific implementations can use out of the box and/or build on.
 
 Base Historian
 
@@ -22,6 +22,8 @@ Base Historian
     information that you don't want persisted.
  5. periodically checks and publishes data about the health of the system
  6. Raises alert messages when historians fail with unexpected errors
+
+.. _Base-Historian-Configurations:
 
 Configuration
 =============
