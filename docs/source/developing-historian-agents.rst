@@ -12,7 +12,7 @@ performs a number of important functions:
 * subscribes to all pertinent topics
 * caches published data to disk until it is successfully recorded to a historian
 * creates the public facing interface for querying results
-* spells out a simple interface for concrete implementation to meet to make a working Historian Agent
+* defines a simple interface for concrete implementations of custom Historian Agents
 * breaks data to publish into reasonably sized chunks before handing it off to the concrete implementation for
   publication.  The size of the chunk is configurable
 * sets up a separate thread for publication.  If publication code needs to block for a long period of time (up to 10s of
@@ -70,7 +70,7 @@ item in the list.  Publication should be batched if possible. For every successf
 that is to be discarded because it is non-publishable the agent must call `report_handled` on those records.  Records
 that should be published but were not for whatever reason require no action.  Future calls to `publish_to`_historian`
 will include these unpublished records.  `publish_to_historian` is always called with the oldest unhandled records. This
-allows the historian to no lose data due to lost connections or other problems.
+allows the historian to not lose data due to lost connections or other problems.
 
 As a convenience `report_all_handled` can be called if all of the items in `published_list` were successfully handled.
 
