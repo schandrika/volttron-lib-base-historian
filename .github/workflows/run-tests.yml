@@ -14,6 +14,9 @@ on:
       - reopened
     paths:
       - '**.py'
+      - '**.yaml'
+      - '**.yml'
+      - '**.toml'
 
 defaults:
   run:
