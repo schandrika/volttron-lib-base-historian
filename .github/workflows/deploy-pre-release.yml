@@ -13,7 +13,7 @@ env:
   LANG: en_US.utf-8
   LC_ALL: en_US.utf-8
   PYTHON_VERSION: '3.10'
-  PROJECT_NAME: volttron-postgresql-historian
+  PROJECT_NAME: volttron-lib-base-historian
   POETRY_VERSION: '1.2.2'
 
 jobs:
