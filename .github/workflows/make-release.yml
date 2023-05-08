@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       publish-to-test-pypi:
-        description: 'Set to true if you want to publish to https://test.pypi.org/legacy/ instead of pypi.org'
+        description: 'Set to true if you want to publish to test pypi instead of pypi'
         required: false
         default: false
         type: boolean
