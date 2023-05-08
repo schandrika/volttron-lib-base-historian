@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       publish-to-test-pypi:
-        description: 'Set to true if you want to publish to test pypi instead of pypi'
+        description: 'Publish to test pypi instead of pypi'
         required: false
         default: false
         type: boolean
