@@ -5,7 +5,7 @@ VOLTTRON base historian framework that provide common functions such as caching,
 
 ## Requirements
 
- - Python >= 3.8
+ - Python >= 3.10
 
 ## Installation
 
