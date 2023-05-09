@@ -78,7 +78,7 @@ def test_base_historian_agent_should_filter_duplicates(base_historian_agent):
     base_historian_agent.start_process_thread()
     # Adding sleep to ensure that all data gets published in the cache before testing
     import gevent
-    gevent.sleep(0.5)
+    gevent.sleep(3)
 
     expected_to_publish_list = [
         {
