@@ -350,10 +350,17 @@ class HistorianTestInterface:
 
         pattern_1 = None
         # Query the historian
-        with pytest.raises(RemoteError):
-            fake_agent.vip.rpc.call('platform.historian',
+        # Should return empty or throw RemoteError due to None
+        try:
+            return_value = fake_agent.vip.rpc.call('platform.historian',
                                     'get_topics_by_pattern',
                                     topic_pattern=pattern_1).get(timeout=10)
+            # postgresql historian handles none and return empty result
+            assert not return_value
+        except RemoteError as e:
+            # SQLiteHistorian through None type exception
+            print(f"Exception {e}")
+
 
     def test_get_version(self, historian, fake_agent):
         """
