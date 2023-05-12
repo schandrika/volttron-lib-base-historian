@@ -24,6 +24,7 @@
 
 import datetime
 import os
+import time
 from shutil import rmtree
 from pathlib import Path
 
@@ -77,8 +78,7 @@ def test_base_historian_agent_should_filter_duplicates(base_historian_agent):
     # Since this is a unit test, we have to "manually start" the base_historian to get the workflow going
     base_historian_agent.start_process_thread()
     # Adding sleep to ensure that all data gets published in the cache before testing
-    import gevent
-    gevent.sleep(3)
+    time.sleep(3)
 
     expected_to_publish_list = [
         {
